@@ -1,10 +1,10 @@
-# ELT - Assets
-An extension for ExtraLandscapingTools that add a bunch of assets that can be useful for detailing/landscaping your cities.
+# ELT - Network
+An extension for ExtraLandscapingTools that add a bunch of network that can be useful for detailing/landscaping your cities.
 
 > [!IMPORTANT]  
 > We're in the early stages of C:S2 modding and the tooling is not ready yet so please take this mod as it is and accept any issue.
 
-### -> [Changelog](https://github.com/AlphaGaming7780/ELT-Assets/blob/main/CHANGELOG.md)
+### -> [Changelog](https://github.com/AlphaGaming7780/ELT-Network/blob/main/CHANGELOG.md)
 
 ## Requirements
 
@@ -14,9 +14,9 @@ An extension for ExtraLandscapingTools that add a bunch of assets that can be us
 
 ## Instalation 
 
-You can download this mod directly for this GitHub or from the [C:S2 Thunderstorm mod page](https://thunderstore.io/c/cities-skylines-ii/p/TritonSupreme/ELT_-_Assets/).
+You can download this mod directly for this GitHub or from the [C:S2 Thunderstorm mod page](https://thunderstore.io/c/cities-skylines-ii/p/TritonSupreme/ELT_-_Network/).
 
-If you download it from the GitHub or the Thunderstore page without using the mod manger, you need to put the folder named `ELT-Assets` inside the `YourGamePath/BepInEx/Plugins` folder.
+If you download it from the GitHub or the Thunderstore page without using the mod manger, you need to put the folder named `ELT-Network` inside the `YourGamePath/BepInEx/Plugins` folder.
 
 # Acknowledgment
 - [CityRat](https://thunderstore.io/c/cities-skylines-ii/p/CityRat/)

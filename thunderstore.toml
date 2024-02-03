@@ -3,10 +3,10 @@ schemaVersion = "0.0.1"
 
 [package]
 namespace = "TritonSupreme"
-name = "ELT - Assets"
+name = "ELT - Network"
 versionNumber = "0.1.0"
-description = "An extension for ExtraLandscapingTools that add a bunch of assets that can be useful for detailing/landscaping your cities."
-websiteUrl = "https://github.com/AlphaGaming7780/ELT-Assets"
+description = "An extension for ExtraLandscapingTools that add a bunch of network that can be useful for detailing/landscaping your cities."
+websiteUrl = "https://github.com/AlphaGaming7780/ELT-Network"
 containsNsfwContent = false
 
 [package.dependencies]
