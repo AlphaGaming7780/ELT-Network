@@ -10,6 +10,16 @@ namespace ELT_Network
 	{
 		public override ExtensionType Type => ExtensionType.Assets;
         public override string ExtensionID => Assembly.GetExecutingAssembly().FullName;
+        // public override ExtensionSettings ExtensionSettings => new NetworkSettings();
+        public override SettingsUI UISettings => new("ELT Network", [
+			new(SettingUI.SettingUIType.CheckBox, "Show untested object", "elt.loadcustomsurfaces")
+		]);
+
+        protected override void OnCreate()
+        {	
+			ExtensionSettings = new NetworkSettings();
+            base.OnCreate();
+        }
 
         internal static Stream GetEmbedded(string embeddedPath) {
 			return Assembly.GetExecutingAssembly().GetManifestResourceStream("ELT-Network.embedded."+embeddedPath);
