@@ -13,14 +13,15 @@ namespace ELT_Network
 
 			base.OnCreate();
 			
-			AddBinding(showUnTestedObject = new GetterValueBinding<bool>("elt", "transformsection_getpos", () => ((NetworkSettings)Network.ExtensionSettings).ShowUnTestedObject));
-			AddBinding(new TriggerBinding<bool>("elt", "transformsection_getpos", new Action<bool>(SetPosition)));
+			// AddBinding(showUnTestedObject = new GetterValueBinding<bool>("elt", "transformsection_getpos", () => ((NetworkSettings)Network.ExtensionSettings).ShowUnTestedObject));
+			// AddBinding(new TriggerBinding<bool>("elt", "transformsection_getpos", new Action<bool>(SetPosition)));
 
 		}
 
-		private void ShowUnTestedObject(bool b) {
-			((NetworkSettings)Network.ExtensionSettings).ShowUnTestedObject = b;
-		}
+		// private void ShowUnTestedObject(bool b) {
+		// 	((NetworkSettings)Network.ExtensionSettings).ShowUnTestedObject = b;
+		// 	Network.Sa
+		// }
 
 	}
 }
