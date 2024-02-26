@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using ExtraLandscapingTools;
+using ExtraLandscapingTools.UI;
 using Game.Net;
 using Game.Prefabs;
 namespace ELT_Network
@@ -12,11 +13,14 @@ namespace ELT_Network
         public override string ExtensionID => Assembly.GetExecutingAssembly().FullName;
         // public override ExtensionSettings ExtensionSettings => new NetworkSettings();
         public override SettingsUI UISettings => new("ELT Network", [
-			new(SettingUI.SettingUIType.CheckBox, "Show untested object", "elt.loadcustomsurfaces")
+			new SettingsCheckBox("Show untested object", "elt_networks.showuntestedobject")
 		]);
+
+		internal static Network network;
 
         protected override void OnCreate()
         {	
+			network = this;
 			ExtensionSettings = new NetworkSettings();
             base.OnCreate();
         }
@@ -55,7 +59,7 @@ namespace ELT_Network
 				else if(prefab is TrackPrefab SubwayTrackPrefab && SubwayTrackPrefab.m_TrackType == TrackTypes.Subway) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationSubway");
 				else if(prefab is TrackPrefab TramTrackPrefab && TramTrackPrefab.m_TrackType == TrackTypes.Tram) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationTram"); 
 				else if(prefab is RoadPrefab roadPrefab) prefabUI.m_Group ??= GetCatUIForRaod(roadPrefab);
-				else if(prefab is SpacePrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Spaces");
+				else if(prefab is SpacePrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Spaces", "Pathways");
 				else if(prefab is MarkerObjectPrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Marker Object Prefab", "Spaces");
 				else prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "[ELT - Network]Failed Prefab, IF you see this tab, repport it, it's a bug.");
 				
@@ -90,7 +94,6 @@ namespace ELT_Network
 					return "Media/Game/Icons/DoubleTrainTrack.svg";
 				}
 				else if(trackPrefab.m_TrackType == Game.Net.TrackTypes.Subway) {
-					Plugin.Logger.LogMessage(prefab.name);
 					return prefab.name switch
 					{
 						"Twoway Subway Track" => "Media/Game/Icons/TwoWayTrainTrack.svg",

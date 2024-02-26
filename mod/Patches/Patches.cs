@@ -19,7 +19,7 @@ namespace ELT_Network
 		static internal readonly string resourcesIcons = Path.Combine(resources, "Icons");
 
 		static void Prefix(GameManager __instance)
-		{		
+		{	
 			Extension.RegisterELTExtension(new Network());
 
 			if(File.Exists(pathToZip)) {
