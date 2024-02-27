@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using Game.UI;
 using ExtraLandscapingTools;
 using System.IO.Compression;
+using Game.Common;
+using Game;
 
 namespace ELT_Network
 {
@@ -53,6 +55,13 @@ namespace ELT_Network
 			gameUIResourceHandler.HostLocationsMap.Add(
 				IconsResourceKey, pathToIconToLoad
 			);
+		}
+	}
+
+	[HarmonyPatch(typeof(SystemOrder), "Initialize")]
+	public static class SystemOrderPatch {
+		public static void Postfix(UpdateSystem updateSystem) {
+			updateSystem.UpdateAt<UI>(SystemUpdatePhase.UIUpdate);
 		}
 	}
 }
