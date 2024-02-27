@@ -10,8 +10,8 @@ namespace ELT_Network
 	public class Network : Extension
 	{
 		public override ExtensionType Type => ExtensionType.Assets;
-        public override string ExtensionID => Assembly.GetExecutingAssembly().FullName;
-        // public override ExtensionSettings ExtensionSettings => new NetworkSettings();
+        public override string ExtensionID => MyPluginInfo.PLUGIN_NAME;
+        internal NetworkSettings ExtensionSettings;
         public override SettingsUI UISettings => new("ELT Network", [
 			new SettingsCheckBox("Show untested object", "elt_networks.showuntestedobject")
 		]);
@@ -21,7 +21,7 @@ namespace ELT_Network
         protected override void OnCreate()
         {	
 			network = this;
-			ExtensionSettings = new NetworkSettings();
+			ExtensionSettings = LoadSettings( new NetworkSettings() );
             base.OnCreate();
         }
 

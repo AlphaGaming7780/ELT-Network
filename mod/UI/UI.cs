@@ -13,14 +13,16 @@ namespace ELT_Network
 
 			base.OnCreate();
 			
-			AddBinding(showUnTestedObject = new GetterValueBinding<bool>("elt_networks", "showuntestedobject", () => ((NetworkSettings)Network.ExtensionSettings).ShowUnTestedObject));
+			AddBinding(showUnTestedObject = new GetterValueBinding<bool>("elt_networks", "showuntestedobject", () => Network.network.ExtensionSettings.ShowUnTestedObject));
 			AddBinding(new TriggerBinding<bool>("elt_networks", "showuntestedobject", new Action<bool>(ShowUnTestedObject)));
 
 		}
 
 		private void ShowUnTestedObject(bool b) {
-			((NetworkSettings)Network.ExtensionSettings).ShowUnTestedObject = b;
-			Network.network.SaveSettings();
+			Plugin.Logger.LogMessage(b);
+			// ((NetworkSettings)Network.ExtensionSettings).ShowUnTestedObject = b;
+			Network.network.ExtensionSettings.ShowUnTestedObject = b;
+			Network.network.SaveSettings(Network.network.ExtensionSettings);
 			showUnTestedObject.Update();
 		}
 
