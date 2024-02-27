@@ -20,7 +20,6 @@ namespace ELT_Network
 
 		private void ShowUnTestedObject(bool b) {
 			Plugin.Logger.LogMessage(b);
-			// ((NetworkSettings)Network.ExtensionSettings).ShowUnTestedObject = b;
 			Network.network.ExtensionSettings.ShowUnTestedObject = b;
 			Network.network.SaveSettings(Network.network.ExtensionSettings);
 			showUnTestedObject.Update();

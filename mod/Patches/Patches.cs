@@ -8,6 +8,9 @@ using ExtraLandscapingTools;
 using System.IO.Compression;
 using Game.Common;
 using Game;
+using Game.Prefabs;
+using System;
+using Game.Net;
 
 namespace ELT_Network
 {
@@ -22,7 +25,7 @@ namespace ELT_Network
 
 		static void Prefix(GameManager __instance)
 		{	
-			Extension.RegisterELTExtension(new Network());
+			Extensions.RegisterELTExtension(new Network());
 
 			if(File.Exists(pathToZip)) {
 				if(Directory.Exists(resources)) Directory.Delete(resources, true);

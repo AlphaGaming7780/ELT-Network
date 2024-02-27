@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using Colossal.Json;
 using ExtraLandscapingTools;
 using ExtraLandscapingTools.UI;
 using Game.Net;
 using Game.Prefabs;
+using static ExtraLandscapingTools.Extensions;
 namespace ELT_Network
 {
 	public class Network : Extension
@@ -26,10 +29,15 @@ namespace ELT_Network
         }
 
         internal static Stream GetEmbedded(string embeddedPath) {
-			return Assembly.GetExecutingAssembly().GetManifestResourceStream("ELT-Network.embedded."+embeddedPath);
+			return Assembly.GetExecutingAssembly().GetManifestResourceStream("ELT_Network.embedded."+embeddedPath);
 		}
 
-		public override bool OnAddPrefab(PrefabBase prefab)
+        public override Dictionary<string, Dictionary<string, string>> OnLoadLocalization()
+        {
+            return Decoder.Decode(new StreamReader(GetEmbedded("Localization.Localization.jsonc")).ReadToEnd()).Make<LocalizationJS>().Localization;
+        }
+
+        public override bool OnAddPrefab(PrefabBase prefab)
 		{	
 
 			try {

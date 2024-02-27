@@ -26,6 +26,10 @@
 		<NoWarn>MSB3277</NoWarn>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<EmbeddedResource Include="embedded\Localization\Localization.jsonc"></EmbeddedResource>
+	</ItemGroup>
+
 	<!--
 		Uncomment this PropertyGroup to let the C# project read DLLs directory from your game directory,
 		and also allow the build to move the mod DLLs into the plugins directory for you
