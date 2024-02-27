@@ -1,58 +1,30 @@
 ﻿using HarmonyLib;
-using Game.SceneFlow;
 using System.IO;
 using System.Reflection;
-using System.Collections.Generic;
-using Game.UI;
-using ExtraLandscapingTools;
+using Game;
 using System.IO.Compression;
+using Game.SceneFlow;
 
-namespace ELT_Network
+namespace ELT_Network.Patches
 {
 
-	[HarmonyPatch(typeof(GameManager), "Awake")]
-	internal class GameManager_Awake
-	{
+    [HarmonyPatch(typeof(GameManager), "Awake")]
+    internal class GameManager_Awake
+    {
 
-		static readonly string pathToZip = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)+"\\resources.zip";
-		static internal readonly string resources = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "resources");
-		static internal readonly string resourcesIcons = Path.Combine(resources, "Icons");
+        static readonly string pathToZip = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)+"\\resources.zip";
 
-		static void Prefix(GameManager __instance)
-		{		
-			Extension.RegisterELTExtension(new Network());
+        static internal readonly string resources = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "resources");
 
-			if(File.Exists(pathToZip)) {
-				if(Directory.Exists(resources)) Directory.Delete(resources, true);
-				ZipFile.ExtractToDirectory(pathToZip, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-				File.Delete(pathToZip);
-			}
+        static void Prefix(GameSystemBase __instance)
+        {
 
-		}
-	}
-
-	[HarmonyPatch(typeof(GameManager), "InitializeThumbnails")]
-	internal class GameManager_InitializeThumbnails
-	{	
-		static readonly string IconsResourceKey = $"{MyPluginInfo.PLUGIN_NAME.ToLower()}";
-
-		public static readonly string COUIBaseLocation = $"coui://{IconsResourceKey}";
-
-		static void Prefix(GameManager __instance)
-		{
-			List<string> pathToIconToLoad = [Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)];
-
-			var gameUIResourceHandler = (GameUIResourceHandler)GameManager.instance.userInterface.view.uiSystem.resourceHandler;
-			
-			if (gameUIResourceHandler == null)
-			{
-				UnityEngine.Debug.LogError("Failed retrieving GameManager's GameUIResourceHandler instance, exiting.");
-				return;
-			}
-			
-			gameUIResourceHandler.HostLocationsMap.Add(
-				IconsResourceKey, pathToIconToLoad
-			);
-		}
-	}
+            if(File.Exists(pathToZip)) {
+                if(Directory.Exists(resources)) Directory.Delete(resources, true);
+                ZipFile.ExtractToDirectory(pathToZip, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+                File.Delete(pathToZip);
+            }
+            ExtraLandscapingTools.CustomSurfaces.AddCustomSurfacesFolder(resources+"\\CustomSurfaces");
+        }
+    }
 }

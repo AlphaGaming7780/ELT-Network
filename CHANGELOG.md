@@ -1,4 +1,3 @@
-# v0.1.0-pre-5
+# v0.1.0
 
-- Add: Invisible Pathways and Road
-- Add: All the track for metro, train and tram and road.
+- Add: Clear Area, Gympark Area, Hangaround Area, Park Area, Walking Area
