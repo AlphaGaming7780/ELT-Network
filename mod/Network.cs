@@ -90,7 +90,7 @@ namespace ELT_Network
 				// {   
 				// 	_ => "Media/Game/Icons/Pathways.svg",
 				// };
-				return $"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/Misc/placeholder.svg";
+				return null; //$"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/Misc/placeholder.svg";
 				//return "Media/Game/Icons/Pathways.svg";
 			} else if (prefab is TrackPrefab trackPrefab) {
 				if(trackPrefab.m_TrackType == Game.Net.TrackTypes.Train) {
@@ -120,7 +120,7 @@ namespace ELT_Network
 				return roadPrefab.name switch
 				{   
 					"Golden Gate Road" => "Media/Game/Icons/LargeRoad.svg",
-					_ => $"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/Misc/placeholder.svg",
+					_ => null //$"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/Misc/placeholder.svg",
 				};
 			}
 
