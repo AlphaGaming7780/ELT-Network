@@ -11,7 +11,7 @@ namespace ELT_Network
 	
 	public class UI : UISystemBase
 	{	
-		private readonly List<string> unTestedPrefab = [""];
+		private readonly List<string> unTestedPrefabs = ["Seagull Spawner"];
 		private static EntityQuery UnTestedPrefabEntityQuery;
         private static GetterValueBinding<bool> showUnTestedObject;
 		protected override void OnCreate() {
@@ -42,8 +42,16 @@ namespace ELT_Network
 				if(ELT.m_PrefabSystem.TryGetPrefab(entity, out MarkerObjectPrefab markerObjectPrefab) && markerObjectPrefab is not null) {
 					// Plugin.Logger.LogMessage(markerObjectPrefab.name);
 					// we can check the name of the prefab we don't want and use the following code on them.
-					if(Network.network.ExtensionSettings.ShowUnTestedObject) ELT_UI.AddEntityObjectToCategoryUI(entity);
-					else ELT_UI.RemoveEntityObjectFromCategoryUI(entity); 
+					if(!Network.network.ExtensionSettings.ShowUnTestedObject)
+					{
+						if (unTestedPrefabs.Contains(markerObjectPrefab.name))
+						{
+							// Plugin.Logger.LogMessage(markerObjectPrefab.name + " has been removed from UI");
+							ELT_UI.RemoveEntityObjectFromCategoryUI(entity);
+							continue;
+						}
+					}
+					ELT_UI.AddEntityObjectToCategoryUI(entity);
 				}
 			}
 
