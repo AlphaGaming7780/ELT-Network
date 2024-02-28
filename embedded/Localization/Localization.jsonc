@@ -15,7 +15,7 @@
 			"Assets.SUB_SERVICE_DESCRIPTION[Marker Object Prefabs]": "Marker Object Prefabs",
 
 			"Assets.NAME[Gympark Area]": "Gympark Area",
-			"Assets.NAME[Walking Area]": "Walking Areaa",
+			// "Assets.NAME[Walking Area]": "Walking Area", The game already have one for me (french)
 			"Assets.DESCRIPTION[Walking Area]": "An area for your citizens to walk around in. When placed around a path they will use this area to alter their pathing.",
 			"Assets.DESCRIPTION[Gympark Area]": "An area for your citizens to work out in.",
 			"Assets.DESCRIPTION[Clear Area]": "Unknown Functionality.",
