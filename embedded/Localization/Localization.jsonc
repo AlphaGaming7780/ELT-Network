@@ -10,15 +10,13 @@
 			"Assets.DESCRIPTION[Invisible Road Path - 1xTwoway]": "2 Direction | 1 lane Car | 2 Lane Pedestrian Road.\n\nDO NOT PLACE THIS PATH ON A GROWABLE BUILDING. THE GAME WILL CRASH WHEN THE BUILDING UPGRADES/FINISHES CONSTRUCTION/ OR IS DESTROYED.",
 			"Assets.DESCRIPTION[Invisible Road Path - 1xOneway]": "1 Direction | 1 Lane Car | 2 Lane Pedestrian Road.\n\nDO NOT PLACE THIS PATH ON A GROWABLE BUILDING. THE GAME WILL CRASH WHEN THE BUILDING UPGRADES/FINISHES CONSTRUCTION/ OR IS DESTROYED.",
 			"Assets.DESCRIPTION[Invisible Car Path - 1xOneway 1xBay]": "1 Direction | 2 lane Car Path.\n\nDO NOT PLACE THIS PATH ON A GROWABLE BUILDING. THE GAME WILL CRASH WHEN THE BUILDING UPGRADES/FINISHES CONSTRUCTION/ OR IS DESTROYED.",
-			
 			"SubServices.NAME[Spaces]": "Spaces and Areas",
-			"Assets.SUB_SERVICE_DESCRIPTION[Spaces]": "Spaces and Areas",
-			"SubServices.NAME[Marker Object Prefabs]": "Marker Object Prefabs",
-			"Assets.SUB_SERVICE_DESCRIPTION[Marker Object Prefabs]": "Marker Object Prefabs",
+			"Assets.SUB_SERVICE_DESCRIPTION[Spaces]": "Spaces and Functional Areas. When placed around a path citizens will use this area to alter their pathing. ",
+			"SubServices.NAME[Marker Object Prefabs]": "Markers and Object Prefabs",
+			"Assets.SUB_SERVICE_DESCRIPTION[Marker Object Prefabs]": "Integrated Stations, Building Markers, Spawn Points, etc.",
 
 			"Assets.NAME[Gympark Area]": "Gympark Area",
-			// "Assets.NAME[Walking Area]": "Walking Area", The game already have one for me (french)
-			"Assets.DESCRIPTION[Walking Area]": "An area for your citizens to walk around in. When placed around a path they will use this area to alter their pathing.",
+			"Assets.DESCRIPTION[Walking Area]": "An area for your citizens to walk around in.",
 			"Assets.DESCRIPTION[Gympark Area]": "An area for your citizens to work out in.",
 			"Assets.DESCRIPTION[Clear Area]": "Unknown Functionality.",
 			"Assets.DESCRIPTION[Park Area]": "An area for your citizens to enjoy nature and greenery.",
