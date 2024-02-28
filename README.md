@@ -12,9 +12,9 @@ An extension for ExtraLandscapingTools that add a bunch of network that can be u
 - BepInEx 5
 - [ExtraLandscapingTools](https://github.com/AlphaGaming7780/ExtraLandscapingTools)
 
-## Instalation 
+## Installation 
 
-You can download this mod directly for this GitHub or from the [C:S2 Thunderstorm mod page](https://thunderstore.io/c/cities-skylines-ii/p/TritonSupreme/ELT_-_Network/).
+You can download this mod directly for this GitHub or from the [C:S2 Thunderstore mod page](https://thunderstore.io/c/cities-skylines-ii/p/TritonSupreme/ELT_-_Network/).
 
 If you download it from the GitHub or the Thunderstore page without using the mod manger, you need to put the folder named `ELT-Network` inside the `YourGamePath/BepInEx/Plugins` folder.
 

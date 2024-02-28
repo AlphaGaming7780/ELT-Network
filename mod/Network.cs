@@ -29,7 +29,8 @@ namespace ELT_Network
         }
 
         internal static Stream GetEmbedded(string embeddedPath) {
-			return Assembly.GetExecutingAssembly().GetManifestResourceStream("ELT_Network.embedded."+embeddedPath);
+			return Assembly.GetExecutingAssembly().GetManifestResourceStream($"ELT_Network.embedded.{embeddedPath}");	
+			// return Assembly.GetExecutingAssembly().GetManifestResourceStream($"{Assembly.GetExecutingAssembly().GetName().Name}.embedded.{embeddedPath}");	
 		}
 
         public override Dictionary<string, Dictionary<string, string>> OnLoadLocalization()
