@@ -67,8 +67,8 @@ namespace ELT_Network
 				else if(prefab is TrackPrefab SubwayTrackPrefab && SubwayTrackPrefab.m_TrackType == TrackTypes.Subway) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationSubway");
 				else if(prefab is TrackPrefab TramTrackPrefab && TramTrackPrefab.m_TrackType == TrackTypes.Tram) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationTram"); 
 				else if(prefab is RoadPrefab roadPrefab) prefabUI.m_Group ??= GetCatUIForRaod(roadPrefab);
-				else if(prefab is SpacePrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Spaces", "Pathways");
-				else if(prefab is MarkerObjectPrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Marker Object Prefab", "Spaces");
+				else if(prefab is SpacePrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Spaces", "Pathways", $"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/CategoryThumbnails/placeholder.svg");
+				else if(prefab is MarkerObjectPrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Marker Object Prefab", "Spaces", $"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/CategoryThumbnails/placeholder.svg");
 				else prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "[ELT - Network]Failed Prefab, IF you see this tab, repport it, it's a bug.");
 				
 				if(prefabUI.m_Group == null) {
