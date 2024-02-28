@@ -66,7 +66,7 @@ namespace ELT_Network
 				else if(prefab is TrackPrefab trainTrackPrefab && trainTrackPrefab.m_TrackType == TrackTypes.Train) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationTrain");
 				else if(prefab is TrackPrefab SubwayTrackPrefab && SubwayTrackPrefab.m_TrackType == TrackTypes.Subway) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationSubway");
 				else if(prefab is TrackPrefab TramTrackPrefab && TramTrackPrefab.m_TrackType == TrackTypes.Tram) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationTram"); 
-				else if(prefab is RoadPrefab roadPrefab) prefabUI.m_Group ??= GetCatUIForRaod(roadPrefab);
+				else if(prefab is RoadPrefab roadPrefab) prefabUI.m_Group ??= GetCatUIForRoad(roadPrefab);
 				else if(prefab is SpacePrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Spaces", "Pathways");
 				else if(prefab is MarkerObjectPrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Marker Object Prefab", "Spaces");
 				else prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "[ELT - Network]Failed Prefab, IF you see this tab, repport it, it's a bug.");
@@ -90,7 +90,8 @@ namespace ELT_Network
 				// {   
 				// 	_ => "Media/Game/Icons/Pathways.svg",
 				// };
-				return "Media/Game/Icons/Pathways.svg";
+				return $"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/Misc/placeholder.svg";
+				//return "Media/Game/Icons/Pathways.svg";
 			} else if (prefab is TrackPrefab trackPrefab) {
 				if(trackPrefab.m_TrackType == Game.Net.TrackTypes.Train) {
 					// return prefab.name switch
@@ -126,7 +127,7 @@ namespace ELT_Network
 			return null;
 		}
 
-		internal static UIAssetCategoryPrefab GetCatUIForRaod(RoadPrefab roadPrefab) {
+		internal static UIAssetCategoryPrefab GetCatUIForRoad(RoadPrefab roadPrefab) {
 			return roadPrefab.name switch
 			{   
 				"Golden Gate Road" => Prefab.GetExistingToolCategory(roadPrefab , "RoadsLargeRoads"),
