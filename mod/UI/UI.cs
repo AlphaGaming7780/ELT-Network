@@ -26,6 +26,7 @@ namespace ELT_Network
 				All =
 			   [
 					ComponentType.ReadOnly<ObjectData>(),
+					ComponentType.ReadOnly<PrefabData>(),
 					ComponentType.ReadOnly<UIObjectData>()
 			   ],
 			});
@@ -37,7 +38,7 @@ namespace ELT_Network
 			Network.network.SaveSettings(Network.network.ExtensionSettings);
 
 			NativeArray<Entity> entities =  UnTestedPrefabEntityQuery.ToEntityArray(AllocatorManager.Temp);
-			 
+
 			foreach(Entity entity in entities) {
 				if(ELT.m_PrefabSystem.TryGetPrefab(entity, out MarkerObjectPrefab markerObjectPrefab) && markerObjectPrefab is not null) {
 					// Plugin.Logger.LogMessage(markerObjectPrefab.name);
@@ -59,6 +60,5 @@ namespace ELT_Network
 
 			showUnTestedObject.Update();
 		}
-
 	}
 }
