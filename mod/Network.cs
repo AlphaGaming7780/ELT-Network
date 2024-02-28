@@ -52,6 +52,10 @@ namespace ELT_Network
 					return true;
 				}
 
+				if(prefab.name.ToLower().Contains("invisible")) {
+					return true;
+				}
+
 				var prefabUI = prefab.GetComponent<UIObject>();
 				if (prefabUI == null)
 				{
