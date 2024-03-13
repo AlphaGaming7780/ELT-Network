@@ -20,7 +20,7 @@
 			"Assets.DESCRIPTION[Invisible Car Path - 1xOneway 1xBay]": "1 Direction | 2 lane Car Path.\n\nDO NOT PLACE THIS PATH ON A GROWABLE BUILDING. THE GAME WILL CRASH WHEN THE BUILDING UPGRADES/FINISHES CONSTRUCTION/ OR IS DESTROYED.",
 
 			"SubServices.NAME[Spaces]": "Spaces and Areas",
-			"Assets.SUB_SERVICE_DESCRIPTION[Spaces]": "Spaces and Functional Areas. When placed around a path citizens will use this area to alter their pathing. ",
+			"Assets.SUB_SERVICE_DESCRIPTION[Spaces]": "Spaces and Functional Areas. When placed around a path citizens will use this area to alter their pathing and include the area",
 			"SubServices.NAME[Marker Object Prefabs]": "Markers and Object Prefabs",
 			"Assets.SUB_SERVICE_DESCRIPTION[Marker Object Prefabs]": "Integrated Stations, Building Markers, Spawn Points, etc.",
 
