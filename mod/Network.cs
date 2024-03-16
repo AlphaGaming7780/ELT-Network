@@ -7,6 +7,7 @@ using ExtraLandscapingTools;
 using ExtraLandscapingTools.UI;
 using Game.Net;
 using Game.Prefabs;
+using UnityEngine;
 using static ExtraLandscapingTools.Extensions;
 namespace ELT_Network
 {
@@ -16,7 +17,8 @@ namespace ELT_Network
         public override string ExtensionID => MyPluginInfo.PLUGIN_NAME;
         internal NetworkSettings ExtensionSettings;
         public override SettingsUI UISettings => new("ELT Network", [
-			new SettingsCheckBox("Show untested object", "elt_networks.showuntestedobject")
+			new SettingsCheckBox("Show outside connection markers", "elt_networks.showOutsideConnections"),
+			new SettingsCheckBox("Show spawners", "elt_networks.showSpawners")
 		]);
 
 		internal static Network network;
@@ -73,7 +75,15 @@ namespace ELT_Network
 				else if(prefab is TrackPrefab TramTrackPrefab && TramTrackPrefab.m_TrackType == TrackTypes.Tram) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationTram"); 
 				else if(prefab is RoadPrefab roadPrefab) prefabUI.m_Group ??= GetCatUIForRoad(roadPrefab);
 				else if(prefab is SpacePrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Spaces", "Pathways");
-				else if(prefab is MarkerObjectPrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Marker Object Prefabs", "Spaces");
+				else if (prefab is MarkerObjectPrefab)
+				{
+					// Don't show outside connections
+					/*if (!ExtensionSettings.ShowOutsideConnections && prefab.name.ToLower().Contains("outside connection"))
+					{
+						return true;
+					}
+					else */prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Marker Object Prefabs", "Spaces");
+				}
 				else prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "[ELT - Network] Failed Prefab, If you see this tab, report it, it's a bug.");
 				
 				if(prefabUI.m_Group == null) {
