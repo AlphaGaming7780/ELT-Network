@@ -39,7 +39,7 @@
 			"Assets.DESCRIPTION[Integrated Subway Stop - Side]": "An invisible subway stop. Must be placed on subway tracks.",
 			"Assets.DESCRIPTION[Integrated Subway Stop - Middle]": "An invisible subway stop. Must be placed on subway tracks, creates middle platform if placed between double tracks.",
 			"Assets.DESCRIPTION[Integrated Taxi Stand]": "An invisible taxi stand. Must be placed on roads.",
-			"Assets.DESCRIPTION[Integrated Cargo Airplan Stop]": "An invisible cargo airplane stop.",
+			"Assets.DESCRIPTION[Integrated Cargo Airplane Stop]": "An invisible cargo airplane stop.",
 			"Assets.DESCRIPTION[Integrated Bus Stop]": "An invisible bus stop. Must be placed on roads.",
 
 			"Assets.DESCRIPTION[Forest Animal Spawner]": "Periodically spawns forest animals such as bears, deer, etc.",
