@@ -14,7 +14,8 @@ namespace ELT_Network
 	
 	public class UI : UISystemBase
 	{
-		private static EntityQuery UnTestedPrefabEntityQuery;
+		private static EntityQuery OutsideConnectionsQuery;
+		private static EntityQuery SpawnersEntityQuery;
         private static GetterValueBinding<bool> showOutsideConnections;
         private static GetterValueBinding<bool> showSpawners;
 		protected override void OnCreate() {
@@ -26,30 +27,33 @@ namespace ELT_Network
 			AddBinding(showSpawners = new GetterValueBinding<bool>("elt_networks", "showSpawners", () => Network.network.ExtensionSettings.ShowSpawners));
 			AddBinding(new TriggerBinding<bool>("elt_networks", "showSpawners", new Action<bool>(b => ShowSpawners(b))));
 
-			UnTestedPrefabEntityQuery = GetEntityQuery(new EntityQueryDesc
+			OutsideConnectionsQuery = GetEntityQuery(new EntityQueryDesc
 			{
 				All =
 			   [
-					ComponentType.ReadOnly<ObjectData>(),
-					ComponentType.ReadOnly<PrefabData>(),
 					ComponentType.ReadOnly<UIObjectData>()
 			   ],
+				Any =
+				[
+					ComponentType.ReadOnly<OutsideConnectionData>(),
+					ComponentType.ReadOnly<Game.Objects.ElectricityOutsideConnection>(),
+					ComponentType.ReadOnly<Game.Objects.WaterPipeOutsideConnection>(),
+				]
 			});
 
-		}
+			SpawnersEntityQuery = GetEntityQuery(new EntityQueryDesc
+			{
+				All =
+				[
+					ComponentType.ReadOnly<UIObjectData>()
+				],
+				Any =
+				[
+					ComponentType.ReadOnly<TrafficSpawnerData>(),
+					ComponentType.ReadOnly<CreatureSpawnData>(),
+				]
+			});
 
-		private void ShowOutsideConnections(bool newValue)
-		{
-			Network.network.ExtensionSettings.ShowOutsideConnections = newValue;
-			Network.network.SaveSettings(Network.network.ExtensionSettings);
-			UpdateUI();
-		}
-
-		private void ShowSpawners(bool newValue)
-		{
-			Network.network.ExtensionSettings.ShowSpawners = newValue;
-			Network.network.SaveSettings(Network.network.ExtensionSettings);
-			UpdateUI();
 		}
 
 		protected override void OnGameLoaded(Context serializationContext)
@@ -58,14 +62,18 @@ namespace ELT_Network
 			if (serializationContext.purpose == Purpose.LoadGame)
 			{
 				Debug.Log("Update UI");
-				UpdateUI();
+				ShowOutsideConnections(Network.network.ExtensionSettings.ShowOutsideConnections);
+				ShowSpawners(Network.network.ExtensionSettings.ShowSpawners);
 			}
 			base.OnGameLoaded(serializationContext);
 		}
 
-		private void UpdateUI() {
+		private void ShowOutsideConnections(bool newValue)
+		{
+			Network.network.ExtensionSettings.ShowOutsideConnections = newValue;
+			Network.network.SaveSettings(Network.network.ExtensionSettings);
 
-			NativeArray<Entity> entities =  UnTestedPrefabEntityQuery.ToEntityArray(AllocatorManager.Temp);
+			NativeArray<Entity> entities =  OutsideConnectionsQuery.ToEntityArray(AllocatorManager.Temp);
 
 			foreach(Entity entity in entities) {
 				if(ELT.m_PrefabSystem.TryGetPrefab(entity, out MarkerObjectPrefab markerObjectPrefab) && markerObjectPrefab is not null) {
@@ -73,30 +81,53 @@ namespace ELT_Network
 					// we can check the name of the prefab we don't want and use the following code on them.
 					if(!Network.network.ExtensionSettings.ShowOutsideConnections)
 					{
-						if (markerObjectPrefab.name.Contains("Outside Connection"))
-						{
-							Plugin.Logger.LogMessage(markerObjectPrefab.name + " has been removed from UI");
-							ELT_UI.RemoveEntityObjectFromCategoryUI(entity);
-							continue;
-						}
-					}
-					if (!Network.network.ExtensionSettings.ShowSpawners)
-					{
-						if (markerObjectPrefab.name.Contains("Spawner"))
-						{
-							Plugin.Logger.LogMessage(markerObjectPrefab.name + " has been removed from UI");
-							ELT_UI.RemoveEntityObjectFromCategoryUI(entity);
-							continue;
-						}
+						Plugin.Logger.LogMessage(markerObjectPrefab.name + " has been removed from UI");
+						ELT_UI.RemoveEntityObjectFromCategoryUI(entity);
+						continue;
 					}
 					ELT_UI.AddEntityObjectToCategoryUI(entity);
 				}
 			}
-
 			ExtraLandscapingTools.Patches.ToolbarUISystemPatch.UpdateMenuUI();
-
 			showOutsideConnections.Update();
+		}
+
+		private void ShowSpawners(bool newValue)
+		{
+			Network.network.ExtensionSettings.ShowSpawners = newValue;
+			Network.network.SaveSettings(Network.network.ExtensionSettings);
+
+			NativeArray<Entity> entities =  SpawnersEntityQuery.ToEntityArray(AllocatorManager.Temp);
+
+			foreach(Entity entity in entities) {
+				if(ELT.m_PrefabSystem.TryGetPrefab(entity, out MarkerObjectPrefab markerObjectPrefab) && markerObjectPrefab is not null) {
+					// Plugin.Logger.LogMessage(markerObjectPrefab.name);
+					// we can check the name of the prefab we don't want and use the following code on them.
+					if(!Network.network.ExtensionSettings.ShowSpawners)
+					{
+						Plugin.Logger.LogMessage(markerObjectPrefab.name + " has been removed from UI");
+						ELT_UI.RemoveEntityObjectFromCategoryUI(entity);
+						continue;
+					}
+					ELT_UI.AddEntityObjectToCategoryUI(entity);
+				}
+			}
+			ExtraLandscapingTools.Patches.ToolbarUISystemPatch.UpdateMenuUI();
 			showSpawners.Update();
+		}
+
+		private void ToggleEntityInUI(NativeArray<Entity> entities, bool value)
+		{
+			foreach (Entity entity in entities)
+			{
+				if (!value)
+				{
+					ELT_UI.RemoveEntityObjectFromCategoryUI(entity);
+					continue;
+				}
+				ELT_UI.AddEntityObjectToCategoryUI(entity);
+			}
+			ExtraLandscapingTools.Patches.ToolbarUISystemPatch.UpdateMenuUI();
 		}
 	}
 }
