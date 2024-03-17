@@ -81,9 +81,6 @@ namespace ELT_Network
 
 			NativeArray<Entity> entities =  SpawnersEntityQuery.ToEntityArray(AllocatorManager.Temp);
 			ToggleEntityInUI(entities, newValue);
-
-
-
 			showSpawners.Update();
 		}
 
