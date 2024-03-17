@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Colossal.Serialization.Entities;
 using Colossal.UI.Binding;
 using ExtraLandscapingTools;
 using Game.Prefabs;
 using Game.UI;
 using Unity.Collections;
 using Unity.Entities;
+using UnityEngine;
+
 namespace ELT_Network
 {
 	
@@ -47,6 +50,17 @@ namespace ELT_Network
 			Network.network.ExtensionSettings.ShowSpawners = newValue;
 			Network.network.SaveSettings(Network.network.ExtensionSettings);
 			UpdateUI();
+		}
+
+		protected override void OnGameLoaded(Context serializationContext)
+		{
+			Debug.Log("OnGameLoaded with purpose: " + serializationContext.purpose);
+			if (serializationContext.purpose == Purpose.LoadGame)
+			{
+				Debug.Log("Update UI");
+				UpdateUI();
+			}
+			base.OnGameLoaded(serializationContext);
 		}
 
 		private void UpdateUI() {
