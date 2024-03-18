@@ -71,7 +71,7 @@ namespace ELT_Network
 
 				if (string.IsNullOrEmpty(prefabUI.m_Icon))
 				{
-					Plugin.Logger.LogInfo("Filling Empty Icon: " + prefab.name);
+					//Plugin.Logger.LogInfo("Filling Empty Icon: " + prefab.name);
 					prefabUI.m_Icon = ELT.GetIcon(prefab);
 				}
 
@@ -109,14 +109,11 @@ namespace ELT_Network
 
 		public override string OnGetIcon(PrefabBase prefab)
 		{
-			Plugin.Logger.LogInfo("H: " + prefab.name);
-			if (prefab.name.Contains("Spawner"))
-				Plugin.Logger.LogInfo("Spawner Get Icon: " + prefab.name);
 			if(File.Exists($"{GameManager_Awake.resourcesIcons}/{prefab.GetType().Name}/{prefab.name}.svg"))
 				return $"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/{prefab.GetType().Name}/{prefab.name}.svg";
 
-			if (prefab.name.Contains("Spawner"))
-				Plugin.Logger.LogInfo("Existing File not found, type: " + prefab.GetType().Name + ", name: " + prefab.name);
+			//if (prefab.name.Contains("Spawner"))
+			//	Plugin.Logger.LogInfo("Existing File not found, type: " + prefab.GetType().Name + ", name: " + prefab.name + ", File: " + $"{GameManager_Awake.resourcesIcons}/{prefab.GetType().Name}/{prefab.name}.svg");
 
 			if(prefab is PathwayPrefab)
 				return null;
