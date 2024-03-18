@@ -30,7 +30,8 @@ namespace ELT_Network
             base.OnCreate();
         }
 
-        internal static Stream GetEmbedded(string embeddedPath) {
+        internal static Stream GetEmbedded(string embeddedPath)
+        {
 			return Assembly.GetExecutingAssembly().GetManifestResourceStream($"ELT_Network.embedded.{embeddedPath}");	
 			// return Assembly.GetExecutingAssembly().GetManifestResourceStream($"{Assembly.GetExecutingAssembly().GetName().Name}.embedded.{embeddedPath}");	
 		}
@@ -41,23 +42,22 @@ namespace ELT_Network
         }
 
         public override bool OnAddPrefab(PrefabBase prefab)
-		{	
-
-			try {
-
+		{
+			try
+			{
 				if (
-					prefab is not PathwayPrefab && 
-					prefab is not TrackPrefab && 
+					prefab is not PathwayPrefab &&
+					prefab is not TrackPrefab &&
 					prefab is not RoadPrefab &&
 					prefab is not MarkerObjectPrefab &&
 					prefab is not SpacePrefab
-				) {	
+				)
+				{
 					return true;
 				}
 
-				if(prefab is MarkerObjectPrefab && prefab.name.ToLower().Contains("invisible")) {
+				if (prefab is MarkerObjectPrefab && prefab.name.ToLower().Contains("invisible"))
 					return true;
-				}
 
 				var prefabUI = prefab.GetComponent<UIObject>();
 				if (prefabUI == null)
@@ -69,28 +69,33 @@ namespace ELT_Network
 					prefabUI.m_Priority = 1;
 				}
 
-				if(prefab is PathwayPrefab) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "Pathways");
-				else if(prefab is TrackPrefab trainTrackPrefab && trainTrackPrefab.m_TrackType == TrackTypes.Train) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationTrain");
-				else if(prefab is TrackPrefab SubwayTrackPrefab && SubwayTrackPrefab.m_TrackType == TrackTypes.Subway) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationSubway");
-				else if(prefab is TrackPrefab TramTrackPrefab && TramTrackPrefab.m_TrackType == TrackTypes.Tram) prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationTram"); 
-				else if(prefab is RoadPrefab roadPrefab) prefabUI.m_Group ??= GetCatUIForRoad(roadPrefab);
-				else if(prefab is SpacePrefab) prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Spaces", "Pathways");
+				if (prefab is PathwayPrefab)
+					prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "Pathways");
+				else if (prefab is TrackPrefab trainTrackPrefab && trainTrackPrefab.m_TrackType == TrackTypes.Train)
+					prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationTrain");
+				else if (prefab is TrackPrefab SubwayTrackPrefab && SubwayTrackPrefab.m_TrackType == TrackTypes.Subway)
+					prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationSubway");
+				else if (prefab is TrackPrefab TramTrackPrefab && TramTrackPrefab.m_TrackType == TrackTypes.Tram)
+					prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "TransportationTram");
+				else if (prefab is RoadPrefab roadPrefab)
+					prefabUI.m_Group ??= GetCatUIForRoad(roadPrefab);
+				else if (prefab is SpacePrefab)
+					prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Spaces", "Pathways");
 				else if (prefab is MarkerObjectPrefab)
-				{
-					// Don't show outside connections
-					/*if (!ExtensionSettings.ShowOutsideConnections && prefab.name.ToLower().Contains("outside connection"))
-					{
-						return true;
-					}
-					else */prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Marker Object Prefabs", "Spaces");
-				}
-				else prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "[ELT - Network] Failed Prefab, If you see this tab, report it, it's a bug.");
-				
-				if(prefabUI.m_Group == null) {
-					return false;
-				}
+					prefabUI.m_Group ??=
+						Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping", "Marker Object Prefabs", "Spaces");
+				else
+					prefabUI.m_Group ??= Prefab.GetOrCreateNewToolCategory(prefab, "Landscaping",
+						"[ELT - Network] Failed Prefab, If you see this tab, report it, it's a bug.");
 
-			} catch (Exception e) {Plugin.Logger.LogError(e);}
+				if (prefabUI.m_Group == null)
+					return false;
+
+			}
+			catch (Exception e)
+			{
+				Plugin.Logger.LogError(e);
+			}
 
 			return base.OnAddPrefab(prefab);
 		}
@@ -98,51 +103,39 @@ namespace ELT_Network
 		public override string OnGetIcon(PrefabBase prefab)
 		{
 
-			if(File.Exists($"{GameManager_Awake.resourcesIcons}/{prefab.GetType().Name}/{prefab.name}.svg")) return $"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/{prefab.GetType().Name}/{prefab.name}.svg";
+			if(File.Exists($"{GameManager_Awake.resourcesIcons}/{prefab.GetType().Name}/{prefab.name}.svg"))
+				return $"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/{prefab.GetType().Name}/{prefab.name}.svg";
 
-			if(prefab is PathwayPrefab) {
-				// return prefab.name switch
-				// {   
-				// 	_ => "Media/Game/Icons/Pathways.svg",
-				// };
-				return null; //$"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/Misc/placeholder.svg";
-				//return "Media/Game/Icons/Pathways.svg";
-			} else if (prefab is TrackPrefab trackPrefab) {
-				if(trackPrefab.m_TrackType == Game.Net.TrackTypes.Train) {
-					// return prefab.name switch
-					// {   
-					// 	"" => 
-					// 	_ => "Media/Game/Icons/DoubleTrainTrack.svg",
-					// };
+			if(prefab is PathwayPrefab)
+				return null;
+			if (prefab is TrackPrefab trackPrefab)
+			{
+				if(trackPrefab.m_TrackType == TrackTypes.Train)
 					return "Media/Game/Icons/DoubleTrainTrack.svg";
-				}
-				else if(trackPrefab.m_TrackType == Game.Net.TrackTypes.Subway) {
+				if(trackPrefab.m_TrackType == TrackTypes.Subway)
+				{
 					return prefab.name switch
 					{
 						"Twoway Subway Track" => "Media/Game/Icons/TwoWayTrainTrack.svg",
 						_ => "Media/Game/Icons/DoubleTrainTrack.svg",
 					};
-					// return "Media/Game/Icons/DoubleTrainTrack.svg";
 				}
-				else if(trackPrefab.m_TrackType == Game.Net.TrackTypes.Tram) {
-					// return prefab.name switch
-					// {   
-					// 	_ => "Media/Game/Icons/OnewayTramTrack.svg",
-					// };
+				if(trackPrefab.m_TrackType == TrackTypes.Tram)
 					return "Media/Game/Icons/OnewayTramTrack.svg";
-				}
-			} else if(prefab is RoadPrefab roadPrefab) {
+			}
+			else if(prefab is RoadPrefab roadPrefab)
+			{
 				return roadPrefab.name switch
 				{   
 					"Golden Gate Road" => "Media/Game/Icons/LargeRoad.svg",
 					_ => null //$"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/Misc/placeholder.svg",
 				};
 			}
-
 			return null;
 		}
 
-		internal static UIAssetCategoryPrefab GetCatUIForRoad(RoadPrefab roadPrefab) {
+		internal static UIAssetCategoryPrefab GetCatUIForRoad(RoadPrefab roadPrefab)
+		{
 			return roadPrefab.name switch
 			{   
 				"Golden Gate Road" => Prefab.GetExistingToolCategory(roadPrefab , "RoadsLargeRoads"),
