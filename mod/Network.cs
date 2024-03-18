@@ -69,6 +69,13 @@ namespace ELT_Network
 					prefabUI.m_Priority = 1;
 				}
 
+				if (string.IsNullOrEmpty(prefabUI.m_Icon))
+				{
+					Plugin.Logger.LogInfo("Filling Empty Icon: " + prefab.name);
+					prefabUI.m_Icon = ELT.GetIcon(prefab);
+				}
+
+
 				if (prefab is PathwayPrefab)
 					prefabUI.m_Group ??= Prefab.GetExistingToolCategory(prefab, "Pathways");
 				else if (prefab is TrackPrefab trainTrackPrefab && trainTrackPrefab.m_TrackType == TrackTypes.Train)
@@ -102,9 +109,14 @@ namespace ELT_Network
 
 		public override string OnGetIcon(PrefabBase prefab)
 		{
-
+			Plugin.Logger.LogInfo("H: " + prefab.name);
+			if (prefab.name.Contains("Spawner"))
+				Plugin.Logger.LogInfo("Spawner Get Icon: " + prefab.name);
 			if(File.Exists($"{GameManager_Awake.resourcesIcons}/{prefab.GetType().Name}/{prefab.name}.svg"))
 				return $"{GameManager_InitializeThumbnails.COUIBaseLocation}/resources/Icons/{prefab.GetType().Name}/{prefab.name}.svg";
+
+			if (prefab.name.Contains("Spawner"))
+				Plugin.Logger.LogInfo("Existing File not found, type: " + prefab.GetType().Name + ", name: " + prefab.name);
 
 			if(prefab is PathwayPrefab)
 				return null;
