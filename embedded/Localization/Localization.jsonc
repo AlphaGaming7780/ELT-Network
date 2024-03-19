@@ -46,7 +46,6 @@
 			"Assets.DESCRIPTION[Eagle Spawner]": "Periodically spawns eagles.",
 			"Assets.DESCRIPTION[Coast Animal Spawner]": "Periodically spawns coast animals such as seagulls.",
 			"Assets.DESCRIPTION[Poultry Animal Spawner]": "Periodically spawns poultry animals such as chickens etc.",
-			"Assets.DESCRIPTION[Pultry Animal Spawner]": "Periodically spawns poultry animals such as chickens etc.",
 			"Assets.DESCRIPTION[Pig Spawner]": "Periodically spawns pigs.",
 			"Assets.DESCRIPTION[Horse Spawner]": "Periodically spawns horses.",
 			"Assets.DESCRIPTION[Cow Spawner]": "Periodically spawns cows.",
@@ -59,7 +58,8 @@
 			"Assets.DESCRIPTION[Moose Spawner]": "Periodically spawns moose.",
 			"Assets.DESCRIPTION[Deer Spawner]": "Periodically spawns deer.",
 			"Assets.DESCRIPTION[Sheep Spawner]": "Periodically spawns sheep.",
-			"Assets.DESCRIPTION[Goose Spawner]": "Periodically spawns geese."
+			"Assets.DESCRIPTION[Goose Spawner]": "Periodically spawns geese.",
+			"Assets.DESCRIPTION[Seagull Spawner]": "Periodically spawns seagulls."
 		}
 	}
 }
